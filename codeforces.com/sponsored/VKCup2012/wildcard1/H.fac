@@ -1,0 +1,184 @@
+USING: io kernel math math.parser sequences ;
+USING: formatting kernel math ;
+USING: io kernel math math.parser ;
+USING: formatting sequences prettyprint io.streams.byte-array io.streams.sequence ;
+USING: arrays kernel math ;
+USING: byte-arrays ;
+USING: io.encodings.string io.encodings.utf8 prettyprint ;
+USING: sequences.private ;
+USING: strings ;
+
+
+
+"SPAM"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"NO"
+"YES"
+readln utf8 encode 
+
+[ 
+  dup
+  40 = [
+    "NI"
+    swap
+  ] when
+  dup
+  41 = [
+    swap
+    drop
+  ] when
+  drop
+] each
+
+
+dup 
+"YES" = [
+   print
+
+   [
+     "NO" =   
+   ] loop
+] [
+   dup "NI" = [
+     "NO" print
+     [
+       "NI" =   
+     ] loop
+   ]
+   [
+     print
+   ]
+
+   [
+     "NO" =   
+   ] loop  
+] if
+
