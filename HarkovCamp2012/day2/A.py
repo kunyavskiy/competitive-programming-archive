@@ -1,0 +1,1 @@
+open(".out","w").write(str(int(open(".in","r").read().split()[0])+int(open(".in","r").read().split()[1])))
