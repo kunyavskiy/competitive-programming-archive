@@ -1,0 +1,58 @@
+{$APPTYPE CONSOLE}
+var n:integer;
+begin
+reset(input,'input.txt');
+rewrite(output,'output.txt');
+read(n);
+case n of
+4:write(2,' ',2);
+6:write(3,' ',3);
+8:write(3,' ',5);
+10:write(5,' ',5);
+12:write(5,' ',7);
+14:write(7,' ',7);
+16:write(11,' ',5);
+18:write(11,' ',7);
+20:write(13,' ',7);
+22:write(11,' ',11);
+24:write(13,' ',11);
+26:write(13,' ',13);
+28:write(17,' ',11);
+30:write(17,' ',13);
+32:write(19,' ',13);
+34:write(17,' ',17);
+36:write(19,' ',17);
+38:write(19,' ',19);
+40:write(23,' ',17);
+42:write(23,' ',19);
+44:write(13,' ',31);
+46:write(23,' ',23);
+48:write(29,' ',19);
+50:write(7,' ',43);
+52:write(11,' ',41);
+54:write(13,' ',41);
+56:write(13,' ',43);
+58:write(17,' ',41);
+60:write(17,' ',43);
+62:write(19,' ',43);
+64:write(23,' ',41);
+66:write(23,' ',43);
+68:write(31,' ',37);
+70:write(29,' ',41);
+72:write(29,' ',43);
+74:write(31,' ',43);
+76:write(29,' ',47);
+78:write(31,' ',47);
+80:write(37,' ',43);
+82:write(41,' ',41);
+84:write(41,' ',43);
+86:write(43,' ',43);
+88:write(41,' ',47);
+90:write(43,' ',47);
+92:write(13,' ',79);
+94:write(47,' ',47);
+96:write(13,' ',83);
+98:write(19,' ',79);
+100:write(11,' ',89);
+end;
+end.
