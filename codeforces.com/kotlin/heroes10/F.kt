@@ -1,41 +1,68 @@
-import kotlin.math.abs
-import kotlin.math.sign
+private const val MOD =  1000000007
+
+@JvmInline
+@Suppress("NOTHING_TO_INLINE")
+private value class ModInt(val x: Int) {
+    inline operator fun plus(other: ModInt) = ModInt((x + other.x).let { if (it >= MOD) it - MOD else it })
+    inline operator fun minus(other: ModInt) = ModInt((x - other.x).let { if (it < 0) it + MOD else it })
+    inline operator fun times(other: ModInt) = ModInt((x.toLong() * other.x % MOD).toInt())
+    fun power(p_: Int): ModInt {
+        var a = this
+        var res = ModInt(1)
+        var p = p_
+        while (p != 0) {
+            if ((p and 1) == 1) res *= a
+            a *= a
+            p = p shr 1
+        }
+        return res
+    }
+
+    inline operator fun div(other: ModInt) = this * other.inv()
+    inline fun inv() = power(MOD - 2)
+
+    companion object {
+        inline fun from(x: Int) = ModInt((x % MOD + MOD) % MOD)
+        inline fun from(x: Long) = ModInt(((x % MOD).toInt() + MOD) % MOD)
+    }
+}
+
+@JvmInline
+private value class ModIntArray(val storage:IntArray) {
+    operator fun get(index: Int) = ModInt(storage[index])
+    operator fun set(index: Int, value: ModInt) { storage[index] = value.x }
+    val size get() = storage.size
+}
+private inline fun ModIntArray(n: Int, init: (Int) -> ModInt) = ModIntArray(IntArray(n) { init(it).x })
+
+private const val COMB_MAX = 400_010
+
+private val fs = ModIntArray(COMB_MAX) { ModInt(1) }.apply {
+    for (i in 1 until size) {
+        set(i, get(i - 1) * ModInt.from(i))
+    }
+}
+private val ifs = ModIntArray(COMB_MAX) { fs[it].inv() }
+
+private fun cnk(n: Int, k: Int) = if (n >= k) fs[n] * ifs[k] * ifs[n - k] else ModInt(0)
 
 fun main() {
-    readInts()
-    val x = readInts()
-    val h = readInts()
-    val ord = buildList {
-        for (i in x.indices.sortedBy { x[it] }) {
-            while (isNotEmpty() && h[i] - h[last()] >= x[i] - x[last()]) {
-                removeLast()
-            }
-            if (isEmpty() || h[last()] - h[i] <= x[i] - x[last()]) {
-                add(i)
-            }
-        }
-    }.map { x[it] to h[it] }
+    val (n, k) = readInts()
+    val ans = ModIntArray(n + 1) { ModInt(0) }
 
-    fun nextAfter(pos: Int) = ord.binarySearch { (x, _) -> if (x >= pos) 1 else -1 }.inv()
-    fun coverBy(idx: Int, pos: Int) = ord.getOrNull(idx)?.let { (x, h) -> maxOf(0, abs(x - pos) - h) } ?: Int.MAX_VALUE
-    fun cover(pos: Int): Int {
-        val a = nextAfter(pos)
-        return minOf(coverBy(a - 1, pos), coverBy(a, pos))
+    for (diff in -n..n) {
+        val ways = maxOf(0, diff - 1)
+        val ll = maxOf(1, diff)
+        val rr = minOf(n, n - 1 + diff)
+        ans[ways] += ModInt(maxOf(0, rr - ll)) * cnk(n - diff - 1, k - 2)
     }
-
-    fun cover2(l: Int, r: Int): Int {
-        val a = nextAfter((l + r) / 2)
-        return minOf(maxOf(coverBy(a, l), coverBy(a, r)), maxOf(coverBy(a - 1, l), coverBy(a - 1, r)))
+    for (i in 1 until n) {
+        ans[i] += cnk(n - i - 1, k - 1)
     }
-
-    val ans = List(readInt()) {
-        val (l, r) = readInts()
-        minOf(
-            cover(l) + cover(r),
-            cover2(l, r)
-        )
+    for (j in 0 until n - 1) {
+        ans[n - j - 1] += cnk(j, k - 1)
     }
-    println(ans.joinToString(" "))
+    println(ans.storage.joinToString(" "))
 }
 
 private fun readInt() = readln().toInt()
