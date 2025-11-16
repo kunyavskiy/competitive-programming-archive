@@ -1,15 +1,14 @@
-import kotlin.math.absoluteValue
-
-private fun solve() {
-    readln()
-    val a = readLongs()
-    println(a.zipWithNext { x, y -> (y - x).absoluteValue }.maxOrNull() ?: 0L)
+private fun solve() : Boolean {
+    val (n, m) = readLongs()
+    if (n < m) return false
+    // x  m, x <= m - 2
+    if (n <= 2 * m - 2) return true
+    return n % 2 == 0L
 }
 
 fun main() {
     repeat(readInt()) {
-        print("Case #${it + 1}: ")
-        solve()
+        println("Case #${it + 1}: ${if (solve()) "YES" else "NO"}")
     }
 }
 
